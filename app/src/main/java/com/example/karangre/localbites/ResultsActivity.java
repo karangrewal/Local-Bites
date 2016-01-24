@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -57,10 +60,19 @@ public class ResultsActivity extends AppCompatActivity {
         return "" + apiURL + apiKey + byLocation + query.replaceAll(" ", "%20");
     }
 
-    private class LocuCallback extends AsyncTask<String, String, String> {
+    public void setListView(Restaurant[] restaurantResults) {
+
+        ListAdapter restaurantsAdapter = new ArrayAdapter<Restaurant>(this,
+                android.R.layout.simple_list_item_1, restaurantResults);
+        ListView restaurantsListView = (ListView) findViewById(R.id.listview);
+        restaurantsListView.setAdapter(restaurantsAdapter);
+
+    }
+
+    private class LocuCallback extends AsyncTask<String, String, Restaurant[]> {
 
         @Override
-        protected String doInBackground(String... args) {
+        protected Restaurant[] doInBackground(String... args) {
 
             // GET request to the server
             String _url = args[0];
@@ -121,18 +133,27 @@ public class ResultsActivity extends AppCompatActivity {
                 //handle exception
             }
 
-            String resString = new String();
-            for (Restaurant r : restaurants) {
-                resString += r.toString() + "\n\n";
-            }
+            Restaurant[] restaurants2 = this.getArray(restaurants);
 
-            return resString.toString();
+            return restaurants2;
         }
 
         //@Override
-        protected void onPostExecute(String restaurants) {
-            TextView results = (TextView) findViewById(R.id.results);
-            results.setText(restaurants);
+        protected void onPostExecute(Restaurant[] restaurantResults) {
+
+            setListView(restaurantResults);
+            //TextView results = (TextView) findViewById(R.id.results);
+            //results.setText(restaurants);
+        }
+
+        Restaurant[] getArray(List<Restaurant> restaurants) {
+            Restaurant[] restaurantsArray = new Restaurant[restaurants.size()];
+
+            for (int i = 0; i < restaurantsArray.length; i++) {
+                restaurantsArray[i] = restaurants.get(i);
+            }
+
+            return restaurantsArray;
         }
     }
 }
