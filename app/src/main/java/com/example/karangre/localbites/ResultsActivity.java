@@ -35,6 +35,9 @@ public class ResultsActivity extends AppCompatActivity {
     private final String byLocation = "&locality=";
     private final String byName = "&name=";
 
+    private final String noSearchResults = "No results for ";
+    private final String resultsString = " restaurants found";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,14 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public void setListView(Restaurant[] restaurantResults) {
+
+        TextView resultsStatus = (TextView) findViewById(R.id.results);
+        if (restaurantResults.length == 0) {
+            resultsStatus.setText(String.format(noSearchResults + "'%s'", query));
+        } else {
+            resultsStatus.setText(String.format("%d" + resultsString,
+                    restaurantResults.length));
+        }
 
         ListAdapter restaurantsAdapter = new ArrayAdapter<Restaurant>(this,
                 android.R.layout.simple_list_item_1, restaurantResults);
