@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.karangre.localbites.MainActivity">
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/main_background"
+        android:scaleType="centerCrop"/>
+
     <TextView
         android:id="@+id/welcome"
         android:layout_above="@+id/space_main"

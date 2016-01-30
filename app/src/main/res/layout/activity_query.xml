@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.karangre.localbites.QueryActivity">
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/query_background"/>
+
     <TextView
         android:fontFamily="sans-serif-medium"
         android:id="@+id/search_message"

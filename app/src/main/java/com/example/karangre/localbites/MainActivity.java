@@ -6,6 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+import android.graphics.Bitmap;
+import android.graphics.*;
+
+import java.io.FileOutputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
