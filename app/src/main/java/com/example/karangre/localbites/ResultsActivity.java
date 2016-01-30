@@ -127,10 +127,6 @@ public class ResultsActivity extends AppCompatActivity {
                         JsonObject rtemp = jrestaurant.getAsJsonObject();
                         r.setName(rtemp.get("name").getAsString());
                         r.setAddress(rtemp.get("street_address").getAsString());
-                        //r.setPhone(rtemp.get("phone").getAsString());
-
-                        // set categories
-                        //r.setCategories(rtemp.get("categories").getAsString());
 
                         restaurants.add(r);
 
